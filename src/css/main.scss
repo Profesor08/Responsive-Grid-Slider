@@ -1,0 +1,62 @@
+body {
+  margin: 0;
+
+  &, * {
+    box-sizing: border-box;
+  }
+}
+
+@import "slider-template";
+@import "slide";
+
+.slider-row {
+  flex-wrap: nowrap;
+
+  .slide-cell {
+    will-change: transform;
+  }
+}
+
+#bootstrap-4-example {
+  @import "../../node_modules/bootstrap/scss/bootstrap-grid";
+
+  .slider-row {
+    overflow: hidden;
+  }
+}
+
+#bootstrap-3-example {
+  @import "../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/variables";
+  @import "../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/mixins";
+  @import "../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/grid";
+
+  .slider-row {
+    overflow: hidden;
+    white-space: nowrap;
+
+    .slide-cell {
+      float: none;
+      display: inline-block;
+      white-space: pre-wrap;
+    }
+  }
+}
+
+#foundation-6-example {
+  @import "container";
+  @import "../../node_modules/foundation-sites/scss/foundation";
+
+  @include foundation-global-styles;
+  @include foundation-grid;
+
+  @include foundation-flex-classes;
+  @include foundation-flex-grid;
+
+  .slider-row {
+    flex-wrap: nowrap;
+
+    .slide-cell {
+
+    }
+  }
+}
