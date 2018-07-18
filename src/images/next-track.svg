@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 128 140" xml:space="preserve"
+	width="128" height="140"
+>
+<polygon class="arrow-1" points="64,48 0,2 4,0 64,44 124,0 128,2 "/>
+<polygon class="arrow-2" points="64,85 0,38 7,35 64,78 123,35 128,38 "/>
+<polygon class="arrow-3" points="64,127 0,80 8,73 64,114 120,73 128,80 "/>
+</svg>

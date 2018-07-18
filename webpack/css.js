@@ -1,3 +1,5 @@
+const IconfontWebpackPlugin = require('iconfont-webpack-plugin');
+
 module.exports = function (paths) {
   return {
     module: {
@@ -5,10 +7,25 @@ module.exports = function (paths) {
         {
           test: /\.css$/,
           include: paths,
+          // use: [
+          //   'style-loader',
+          //   'css-loader'
+          // ]
+
           use: [
-            'style-loader',
-            'css-loader'
+            'css-loader',
+            {
+              loader: 'postcss-loader',
+              options: {
+                plugins: (loader) => [
+                  // Add the plugin
+                  new IconfontWebpackPlugin(loader)
+                ]
+              }
+            }
           ]
+
+
         }
       ]
     }

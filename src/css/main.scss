@@ -60,3 +60,22 @@ body {
     }
   }
 }
+
+.icon {
+  &:before {
+    color: blue;
+    transition: 0.5s color;
+  }
+
+  &:hover:before {
+    color: red;
+  }
+
+  &.next-track:before {
+    font-icon: url("../images/next-track.svg");
+  }
+
+  &.audio-button:before {
+    font-icon: url("../images/audio-button.svg");
+  }
+}

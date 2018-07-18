@@ -1,5 +1,5 @@
+import "babel-polyfill";
 import {TweenLite} from "gsap";
-import Hammer from "hammerjs";
 
 
 export default function ResponsiveGridSlider(el, args) {
@@ -187,24 +187,6 @@ export default function ResponsiveGridSlider(el, args) {
   });
 
   /**
-   * touch actions
-   * @type {Hammer}
-   */
-  let mc = new Hammer(el);
-
-  mc.on("panstart", function (e) {
-    flags.panStart = true;
-  });
-
-  mc.on("panend", function (e) {
-    flags.panStart = false;
-  });
-
-  mc.on("panleft panright", function (e) {
-
-  });
-
-  /**
    * Event binding
    * @param event
    * @param callback
@@ -260,11 +242,18 @@ export default function ResponsiveGridSlider(el, args) {
    * @param id
    */
   function to(id) {
-    if (id >= 0 && id <= slides.length) {
+    if (id >= 0 && id < slides.length) {
       if (flags.canSlide && !flags.animationBlock) {
-        offset = id;
-        organizeSlides();
-        fireEvent("to");
+        // if (id > offset) {
+        //   let end = id - 1;
+        //   for(let i = offset; i <= end; i++) {
+        //     offset++;
+        //     organizeSlides(true);
+        //   }
+        //   incOffset();
+        //   organizeSlides();
+        // }
+        // fireEvent("to");
       }
     }
   }
@@ -359,7 +348,7 @@ export default function ResponsiveGridSlider(el, args) {
     }
 
     for (let i = offset, j = 0; j < slides.length; i++, j++) {
-      if (deltaWidth > 0) {
+      if (deltaWidth > 1) {
         move(slides[i], x, instant);
         deltaWidth -= slides[i].offsetWidth;
         x += slides[i].offsetWidth;
@@ -483,6 +472,22 @@ export default function ResponsiveGridSlider(el, args) {
   }
 
   /**
+   * Get current slide offset
+   * @return {number}
+   */
+  function getCurrentSlideOffset() {
+    return offset;
+  }
+
+  /**
+   * Get count of slides
+   * @return {number}
+   */
+  function getTotalSlides() {
+    return slides.length;
+  }
+
+  /**
    * Checks if slider can slide
    * @return {boolean}
    */
@@ -527,6 +532,8 @@ export default function ResponsiveGridSlider(el, args) {
     refresh: refresh,
     play: play,
     pause: pause,
-    stop: stop
+    stop: stop,
+    getTotalSlides: getTotalSlides,
+    getCurrentSlideOffset: getCurrentSlideOffset,
   };
 }

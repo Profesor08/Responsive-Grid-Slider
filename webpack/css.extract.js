@@ -1,4 +1,5 @@
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const IconfontWebpackPlugin = require('iconfont-webpack-plugin');
 
 module.exports = function (paths) {
   return {
@@ -14,6 +15,15 @@ module.exports = function (paths) {
               {
                 loader: 'css-loader',
                 options: {minimize: true}
+              },
+              {
+                loader: 'postcss-loader',
+                options: {
+                  plugins: (loader) => [
+                    // Add the plugin
+                    new IconfontWebpackPlugin(loader)
+                  ]
+                }
               },
               'sass-loader'
             ]
