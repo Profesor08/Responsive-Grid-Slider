@@ -17,6 +17,38 @@ body {
   }
 }
 
+#custom-grid-example {
+  .responsive-slider {
+    //width: 70%;
+    margin: 0 auto;
+    padding: 20px 0;
+    background: rgba(255, 0, 0, .3);
+  }
+
+  .slider-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    background: rgba(255, 0, 0, .3);
+    width: 150%;
+    margin-left: calc(-25%);
+    //margin-left: calc(-100% / 8);
+    //margin-right: calc(-100% / 8);
+    //transform: translateX(calc(-25% / 4));
+    position: relative;
+
+    .slide-cell {
+      flex: 0 0 calc(100% / 4);
+    }
+
+    .slide-container {
+      margin: 0 30px;
+    }
+  }
+}
+
+
+
 #bootstrap-4-example {
   @import "../../node_modules/bootstrap/scss/bootstrap-grid";
 

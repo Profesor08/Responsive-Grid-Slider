@@ -334,6 +334,10 @@ export default function ResponsiveGridSlider(el, args) {
       return;
     }
 
+    if (instant === true) {
+      flags.animationBlock = 0;
+    }
+
     fireEvent("translate");
 
     // Moving visible slides
