@@ -418,14 +418,19 @@ export default function ResponsiveGridSlider(el, args) {
     }
 
     for (let i = offset, j = 0; j < slides.length; i++, j++) {
+      slides[i].classList.remove("is-active");
       if (deltaWidth > 1) {
         move(slides[i], x, instant);
         deltaWidth -= slides[i].offsetWidth;
         x += slides[i].offsetWidth;
         lastSlideOffset = i;
+
+        slides[i].classList.add("is-active");
+        slides[i].setAttribute("data-active-index", j);
       }
       else {
         hiddenSlides.push(slides[i]);
+        slides[i].setAttribute("data-active-index", -1);
       }
 
       if (i === slides.length - 1) {
