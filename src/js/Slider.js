@@ -1,5 +1,6 @@
 import "babel-polyfill";
 import {TweenLite} from "gsap";
+import Hammer from "hammerjs";
 
 
 export default function ResponsiveGridSlider(el, args) {
@@ -74,6 +75,71 @@ export default function ResponsiveGridSlider(el, args) {
   let rightHidden = [];
 
   let autoPlayTimeout = null;
+
+  let mc = new Hammer(el);
+
+  mc.get("pan").set({direction: Hammer.DIRECTION_HORIZONTAL});
+
+  mc.on("panmove", function (e) {
+    if (flags.canSlide && !flags.animationBlock) {
+
+      let x = e.deltaX / 3;
+
+      if (Math.abs(x) > slides[0].offsetWidth / 2) {
+        if (x > 0) {
+          x = slides[0].offsetWidth / 2;
+        }
+        else {
+          x = -slides[0].offsetWidth / 2;
+        }
+      }
+
+      for(let i = 0; i < slides.length; i++) {
+        TweenLite.set(slides[i], {
+          x: slides[i].currentX + x + config.posOffset,
+        });
+      }
+
+    }
+  });
+
+  mc.on("panend", function (e) {
+    if (flags.canSlide && !flags.animationBlock) {
+
+      let x = e.deltaX / 3;
+
+      if (Math.abs(x) > slides[0].offsetWidth / 2) {
+        if (x > 0) {
+          x = slides[0].offsetWidth / 2;
+        }
+        else {
+          x = -slides[0].offsetWidth / 2;
+        }
+      }
+
+      for (let i = 0; i < slides.length; i++) {
+        TweenLite.set(slides[i], {
+          currentX: slides[i].currentX + x + config.posOffset,
+        });
+      }
+
+      if (x > 0) {
+        prev();
+      }
+      else {
+        next();
+      }
+
+    }
+  });
+
+  function isElementInView(slide) {
+    let width = el.offsetWidth;
+    let scroll = el.scrollLeft;
+    let x = slide.offsetLeft + scroll;
+
+    return x >= scroll && x + slide.offsetWidth <= width + scroll;
+  }
 
   /**
    * Initialize slider autoplay
